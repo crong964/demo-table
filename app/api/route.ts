@@ -255,7 +255,7 @@ export async function GET(req: NextRequest) {
 
   const total = rooms.length;
 
-  const totalPage = Math.ceil(total / perPage);
+  const totalPages = Math.ceil(total / perPage);
 
   const startIndex = (page - 1) * perPage;
 
@@ -267,7 +267,7 @@ export async function GET(req: NextRequest) {
   return Response.json({
     data,
     total,
-    totalPage,
+    totalPages,
     currentPage: page,
     perPage,
   });
