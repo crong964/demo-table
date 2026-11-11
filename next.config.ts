@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -6,11 +6,34 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   turbopack: {
     rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
+      '*.css': {
+        loaders: ['@tailwindcss/turbopack'],
+        as: '*.css',
       },
     },
+  },
+  async headers() {
+    return [
+      {
+        // Áp dụng cho tất cả các API routes
+        source: '/api/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Credentials', value: 'true' },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: '*',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: '*',
+          },
+        ],
+      },
+    ];
   },
 };
 
